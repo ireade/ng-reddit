@@ -5,21 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>ng-Reddit</title>
 
-    <link rel="stylesheet" href="bootstrap.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
 </head>
 <body style="width: 80%; margin: 0 auto; padding-top: 70px;" ng-app="ng-reddit">
 
 
     <nav class="navbar navbar-default navbar-fixed-top" ng-controller="LoginController">
 
-        <div class="container">
+        <div class="container" style="width: 80%; margin: 0 auto;">
+
+        <a class="navbar-brand" ng-href="#/">ng-Reddit</a>
+
         <a class="btn btn-default navbar-btn" ng-href="#/">Front Page</a>
         <a class="btn btn-default navbar-btn" ng-href="#/new">Submit</a>
-        <a class="btn btn-default navbar-btn" ng-click="loginWithTwitter()">Login with Twitter</a>
-        <a class="btn btn-default navbar-btn" ng-click="logout()">Logout</a>
 
-        {{username}}
-         </div>  
+
+        <a class="btn btn-default navbar-btn" ng-hide="currentUser" ng-click="login()">Login with Twitter</a>
+
+        <p class="navbar-text navbar-right" ng-show="currentUser">Signed in as <a ng-href="https://twitter.com/{{currentUser.twitter.username}}">{{currentUser.twitter.username}}</a> (<a ng-href="#/" ng-click="logout()">Logout</a>)</p>
+
 
     </nav>
 
@@ -36,8 +40,9 @@
     <script src="https://cdn.firebase.com/libs/angularfire/1.0.0/angularfire.min.js"></script>
     
     <!-- App -->
-    <script src="app.js"></script>
-    <script src="controllers/posts.js"></script>
-    <script src="controllers/login.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/Authentication.js"></script>
+    <script src="scripts/posts.js"></script>
+    <script src="scripts/login.js"></script>
 </body>
 </html>

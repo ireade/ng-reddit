@@ -1,4 +1,4 @@
-<h1 class="text-center">ng-Reddit</h1><br>
+<h1 class="text-center">Front Page</h1><br>
 
 <ul class="list-group" style="list-style-type: none;">
 	<li ng-repeat="post in posts | orderBy: '-votes'" class="panel panel-default">
@@ -28,19 +28,19 @@
 
 		<ul class="nav nav-tabs nav-justified" style="margin-bottom: 20px;">
 		    <li ng-class="{ active:tab == 1 }">
-		      <a href ng-click="setTab(1)">Description</a>
+		      <a href ng-click="tab = 1">Description</a>
 		    </li>
 		    <li ng-class="{ active:tab == 2 }">
-		      <a href ng-click="setTab(2)">Comments</a>
+		      <a href ng-click="tab = 2">Comments</a>
 		    </li>
-		    <li ng-class="{ active:tab == 3 }">
-		      <a href ng-click="setTab(3)">Edit/Delete</a>
+		    <li ng-class="{ active:tab == 3 }" ng-show="post.user == currentUser.twitter.username">
+		      <a href ng-click="tab = 3">Edit/Delete</a>
 		    </li>
 		</ul>
 			
 		
 		<div class="post-description" ng-show="tab == 1">
-			<p>Posted on date by name</p>
+			<p>Posted on {{post.date | date}} by <a ng-href="https://twitter.com/{{post.user}}">{{post.user}}</a></p>
 			<p>{{post.description}}</p>
 		</div>
 
@@ -49,17 +49,24 @@
 				<li class="list-group-item" ng-repeat="comment in post.comments">
 					
 					<h4 class="list-group-item-heading">
-						<a ng-href="https://twitter.com/">User</a> says:</h4>
+						<a ng-href="https://twitter.com/{{comment.user}}">{{comment.user}}</a> says:</h4>
 
 					<blockquote class="list-group-item-text">{{comment.text}}</blockquote><br>
 
-					<button ng-click="deleteComment(post, comment)" class="btn btn-danger btn-sm">Delete Comment</button>
+					<button ng-click="deleteComment(post, comment)" class="btn btn-danger btn-sm" ng-show="comment.user == currentUser.twitter.username">Delete Comment</button>
 				</li>
 			</ul>
 
-		<form action="" ng-submit="addComment(post, comment)">
+
+		<div class="alert alert-warning" role="alert" ng-show="!currentUser">
+			You must be logged in to leave a comment.
+		</div>
+
+		<form ng-submit="addComment(post, comment)" ng-show="currentUser">
 			<div class="form-group">
 				<label for="" class="control-label" for="focusedInput">Your Comment:</label>
+
+			
 				<textarea type="text" ng-model="comment.text" class="form-control"></textarea>
 			</div>
 			<input type="submit" class="btn btn-success btn-block" value="Add Comment">
@@ -68,10 +75,16 @@
 		</div>
 
 		<div class="post-settings" ng-show="tab == 3">
-			
-			<div class="alert alert-success" role="alert" ng-show="updateMessage != '' ">{{updateMessage}}</div>
 
-			<form action="" ng-submit="updatePost(post)" novalidate>
+			
+			<div class="alert alert-success" role="alert" ng-show="updateMessage != '' ">
+				{{updateMessage}}
+				<button ng-click="clearupdateMessage()" class="btn btn-sm btn-info">
+					Dismiss
+				</button>
+			</div>
+
+			<form ng-submit="updatePost(post)" novalidate>
 			<div class="form-group">
 				<label for="" class="control-label" for="focusedInput">Post Name</label>
 				<input type="text" ng-model="post.name" class="form-control" required>
