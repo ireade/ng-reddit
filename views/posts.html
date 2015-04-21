@@ -1,0 +1,81 @@
+<h1 class="text-center">ng-Reddit</h1><br>
+
+<ul class="list-group" style="list-style-type: none;">
+	<li ng-repeat="post in posts" class="panel panel-default">
+
+		<div class="panel-heading">		
+			<h2 style="display: inline-block;"><a ng-href="{{post.url}}">{{post.name}}</a></h2>
+
+		
+		<div class="voting pull-right" style="display: inline-block; margin-top: 8px;">
+			<div class="btn-group">
+			
+				<button ng-click="upVote(post)" class="btn btn-success">
+					Upvote
+				</button>
+				<button class="btn btn-default" disabled>
+					{{post.votes}}
+				</button>
+				<button ng-click="downVote(post)" class="btn btn-danger">
+					Downvote
+				</button>
+			</div>
+		</div>
+		
+		</div>
+
+		<section class="panel-body">
+
+		<ul class="nav nav-tabs nav-justified" ng-init="tab = 1" style="margin-bottom: 20px;">
+		    <li ng-class="{ active:tab == 1 }">
+		      <a href ng-click="tab = 1">Description</a>
+		    </li>
+		    <li ng-class="{ active:tab == 2 }">
+		      <a href ng-click="tab = 2">Comments</a>
+		    </li>
+		    <li ng-class="{ active:tab == 3 }">
+		      <a href ng-click="tab = 3">Edit/Delete</a>
+		    </li>
+		</ul>
+			
+		
+		<div class="post-description" ng-show="tab == 1">
+			description goes here
+			<p>{{post.description}}</p>
+		</div>
+
+		<div class="post-comments" ng-show="tab == 2">
+			<ul class="list-group">
+				<li class="list-group-item" ng-repeat="comment in post.comments">
+					<h4 class="list-group-item-heading"><a ng-href="https://twitter.com/">User will go here</a></h4>
+
+					<p class="list-group-item-text">{{comment.text}}</p>
+
+					<button ng-click="deleteComment(post, comment)" class="btn btn-danger">Delete Comment</button>
+				</li>
+			</ul>
+
+		<form action="" ng-submit="addComment(post, comment)">
+			<div class="form-group">
+				<label for="" class="control-label" for="focusedInput">Your Comment:</label>
+				<input type="text" ng-model="comment.text" class="form-control">
+			</div>
+			<input type="submit" class="btn btn-success btn-block" value="Add Comment">
+		</form>
+			
+		</div>
+
+		<div class="post-settings" ng-show="tab == 3">
+			<p>Edit or Delete</p>
+
+			<button ng-click="deletePost(post)" class="btn btn-danger">Delete Post</button><br><br>
+
+		</div>
+
+
+
+	
+		</section>
+
+	</li>
+</ul>
