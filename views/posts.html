@@ -47,9 +47,11 @@
 		<div class="post-comments" ng-show="tab == 2">
 			<ul class="list-group">
 				<li class="list-group-item" ng-repeat="comment in post.comments">
-					<h4 class="list-group-item-heading"><a ng-href="https://twitter.com/">User will go here</a></h4>
+					
+					<h4 class="list-group-item-heading">
+						<a ng-href="https://twitter.com/">User</a> says:</h4>
 
-					<p class="list-group-item-text">{{comment.text}}</p><br>
+					<blockquote class="list-group-item-text">{{comment.text}}</blockquote><br>
 
 					<button ng-click="deleteComment(post, comment)" class="btn btn-danger btn-sm">Delete Comment</button>
 				</li>
