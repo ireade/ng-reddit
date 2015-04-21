@@ -3,22 +3,12 @@ app.controller('PostsController', function(FIREBASE_URL, $scope, $location, $fir
 	$scope.posts = Posts;
 
 
-	// $scope.tab = 1;
+	$scope.tab = 1;
 
-	// $scope.tab.isSet = function(n) {
-	// 	$scope.tab = n;
-	// }
-
-	// $scope.tab = 1;
-
- //  this.isSet = function(checkTab) {
- //    return this.tab === checkTab;
- //  };
-
- //  this.setTab = function(activeTab) {
- //    this.tab = activeTab;
- //  };
-
+	$scope.setTab = function(n) {
+		$scope.tab = n;
+		$scope.updateMessage = '';
+	}
 
 
 
@@ -41,6 +31,11 @@ app.controller('PostsController', function(FIREBASE_URL, $scope, $location, $fir
 
 		});
 	};
+
+	$scope.updatePost = function(post) {
+		Posts.$save(post);
+		$scope.updateMessage = 'The post was successfully updated.';
+	}
 
 	$scope.deletePost = function(post) {
 		Posts.$remove(post);

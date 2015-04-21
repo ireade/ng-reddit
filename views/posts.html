@@ -1,7 +1,7 @@
 <h1 class="text-center">ng-Reddit</h1><br>
 
 <ul class="list-group" style="list-style-type: none;">
-	<li ng-repeat="post in posts" class="panel panel-default">
+	<li ng-repeat="post in posts | orderBy: '-votes'" class="panel panel-default">
 
 		<div class="panel-heading">		
 			<h2 style="display: inline-block;"><a ng-href="{{post.url}}">{{post.name}}</a></h2>
@@ -26,21 +26,21 @@
 
 		<section class="panel-body">
 
-		<ul class="nav nav-tabs nav-justified" ng-init="tab = 1" style="margin-bottom: 20px;">
+		<ul class="nav nav-tabs nav-justified" style="margin-bottom: 20px;">
 		    <li ng-class="{ active:tab == 1 }">
-		      <a href ng-click="tab = 1">Description</a>
+		      <a href ng-click="setTab(1)">Description</a>
 		    </li>
 		    <li ng-class="{ active:tab == 2 }">
-		      <a href ng-click="tab = 2">Comments</a>
+		      <a href ng-click="setTab(2)">Comments</a>
 		    </li>
 		    <li ng-class="{ active:tab == 3 }">
-		      <a href ng-click="tab = 3">Edit/Delete</a>
+		      <a href ng-click="setTab(3)">Edit/Delete</a>
 		    </li>
 		</ul>
 			
 		
 		<div class="post-description" ng-show="tab == 1">
-			description goes here
+			<p>Posted on date by name</p>
 			<p>{{post.description}}</p>
 		</div>
 
@@ -49,16 +49,16 @@
 				<li class="list-group-item" ng-repeat="comment in post.comments">
 					<h4 class="list-group-item-heading"><a ng-href="https://twitter.com/">User will go here</a></h4>
 
-					<p class="list-group-item-text">{{comment.text}}</p>
+					<p class="list-group-item-text">{{comment.text}}</p><br>
 
-					<button ng-click="deleteComment(post, comment)" class="btn btn-danger">Delete Comment</button>
+					<button ng-click="deleteComment(post, comment)" class="btn btn-danger btn-sm">Delete Comment</button>
 				</li>
 			</ul>
 
 		<form action="" ng-submit="addComment(post, comment)">
 			<div class="form-group">
 				<label for="" class="control-label" for="focusedInput">Your Comment:</label>
-				<input type="text" ng-model="comment.text" class="form-control">
+				<textarea type="text" ng-model="comment.text" class="form-control"></textarea>
 			</div>
 			<input type="submit" class="btn btn-success btn-block" value="Add Comment">
 		</form>
@@ -66,9 +66,29 @@
 		</div>
 
 		<div class="post-settings" ng-show="tab == 3">
-			<p>Edit or Delete</p>
+			
+			<div class="alert alert-success" role="alert" ng-show="updateMessage != '' ">{{updateMessage}}</div>
 
-			<button ng-click="deletePost(post)" class="btn btn-danger">Delete Post</button><br><br>
+			<form action="" ng-submit="updatePost(post)" novalidate>
+			<div class="form-group">
+				<label for="" class="control-label" for="focusedInput">Post Name</label>
+				<input type="text" ng-model="post.name" class="form-control" required>
+			</div>
+			<div class="form-group">
+				<label for="" class="control-label" for="focusedInput">Post URL</label>
+				<input type="text" ng-model="post.url" class="form-control">
+			</div>
+			<div class="form-group">
+				<label for="" class="control-label" for="focusedInput">Post Description</label>
+				<input type="text" ng-model="post.description" class="form-control">
+			</div>
+			
+			<input type="submit" value="Update Post" class="btn btn-success btn-block">
+			</form>
+
+			<br>
+
+			<button ng-click="deletePost(post)" class="btn btn-danger btn-block">Delete Post</button>
 
 		</div>
 
