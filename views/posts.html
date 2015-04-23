@@ -10,14 +10,14 @@
 		<div class="voting pull-right" style="display: inline-block; margin-top: 8px;">
 			<div class="btn-group">
 			
-				<button ng-click="upVote(post)" class="btn btn-success">
-					Upvote
+				<button ng-click="upVote(post)" class="btn btn-success" ng-hide="post.user == currentUser.twitter.username">
+					Up
 				</button>
 				<button class="btn btn-default" disabled>
-					{{post.votes}}
+					{{post.votes}} votes
 				</button>
-				<button ng-click="downVote(post)" class="btn btn-danger">
-					Downvote
+				<button ng-click="downVote(post)" class="btn btn-danger" ng-hide="post.user == currentUser.twitter.username">
+					Down
 				</button>
 			</div>
 		</div>

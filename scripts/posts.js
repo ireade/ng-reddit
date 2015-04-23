@@ -6,7 +6,7 @@ app.controller('PostsController', function(FIREBASE_URL, $scope, $rootScope, $lo
 	$scope.posts = posts;
 
 
-	$scope.tab = 2;
+	$scope.tab = 1;
 	$scope.updateMessage = '';
 
 	$scope.clearupdateMessage = function() {
@@ -48,14 +48,41 @@ app.controller('PostsController', function(FIREBASE_URL, $scope, $rootScope, $lo
 
 
 	// Voting System
+
+
+	$rootScope.currentUser.userVote = 1;
+
+
 	$scope.upVote = function(post) {
-		post.votes++;
-		posts.$save(post);
+
+		if ( $rootScope.currentUser.userVote == 1 | $rootScope.currentUser.userVote == 0 ) {
+
+			post.votes++;
+			posts.$save(post);
+
+			$rootScope.currentUser.userVote++;
+
+		} else {
+			console.log($rootScope.currentUser.userVote);
+			console.log('cannot upvote anymore');
+		}
+
+		
 	};
 
 	$scope.downVote = function(post) {
-		post.votes--;
-		posts.$save(post);
+
+		if ( $rootScope.currentUser.userVote == 1 | $rootScope.currentUser.userVote == 2 ) {
+			post.votes--;
+			posts.$save(post);
+
+			$rootScope.currentUser.userVote--;
+
+		} else {
+			console.log($rootScope.currentUser.userVote);
+			console.log('cannot downvote anymore');
+		}
+		
 	};
 
 
@@ -75,20 +102,23 @@ app.controller('PostsController', function(FIREBASE_URL, $scope, $rootScope, $lo
 		});
 
 		comment.text = '';
-	}
+	};
 
 	$scope.deleteComment = function(post, comment) {
 
 		var ref = new Firebase(FIREBASE_URL + '/'+ post.$id + '/comments');
 		var comments = $firebaseArray(ref);
 
- 
 
-		comments.$remove(comment);
+		//comments.$remove();
 
-		//console.log(comments);
 
-	}
+
+		console.log(comment);
+
+		//console.log(posts);
+
+	};
 
 
 });
