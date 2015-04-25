@@ -1,6 +1,12 @@
 <h1 class="text-center">Front Page</h1><br>
 
 <ul class="list-group" style="list-style-type: none;">
+
+	<div class="alert alert-warning" role="alert" ng-show="userVoteAlert">
+		You must be logged in to vote.
+	</div>
+
+
 	<li ng-repeat="post in posts | orderBy: '-votes'" class="panel panel-default">
 
 		<div class="panel-heading">		
