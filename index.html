@@ -6,6 +6,7 @@
     <title>ng-Reddit</title>
 
     <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body style="width: 80%; margin: 0 auto; padding-top: 70px;" ng-app="ng-reddit">
 
@@ -13,8 +14,6 @@
     <nav class="navbar navbar-default navbar-fixed-top" ng-controller="LoginController">
 
         <div class="container" style="width: 80%; margin: 0 auto;">
-
-        <a class="navbar-brand" ng-href="#/">ng-Reddit</a>
 
         <a class="btn btn-default navbar-btn" ng-href="#/">Front Page</a>
         <a class="btn btn-default navbar-btn" ng-href="#/new">Submit</a>
@@ -42,7 +41,11 @@
     <!-- App -->
     <script src="scripts/app.js"></script>
     <script src="scripts/Authentication.js"></script>
+    
+
+    <script src="scripts/newPost.js"></script>
     <script src="scripts/posts.js"></script>
+    <script src="scripts/post.js"></script>
     <script src="scripts/login.js"></script>
 </body>
 </html>

@@ -1,6 +1,11 @@
 <h1 class="text-center">Submit A New Post</h1><br>
 
-<div class="alert alert-warning" role="alert" ng-show="!currentUser">You must be signed in to submit a new post. Sign in with Twitter using the link above.</div>
+<div class="alert alert-warning" role="alert" ng-show="errorMessage != '' ">
+	{{errorMessage}}
+	<button ng-click="clearErrorMessage()" class="btn btn-sm btn-info">
+		Dismiss
+	</button>
+</div>
 
 <form ng-submit="addPost(post)" ng-show="currentUser" novalidate>
 
@@ -13,7 +18,7 @@
 		<input type="url" ng-model="post.url" class="form-control">
 	</div>
 	<div class="form-group">
-		<label for="" class="control-label" for="focusedInput">Post Description</label>
+		<label for="" class="control-label" for="focusedInput"><em>or</em> Post Description</label>
 		<textarea type="text" ng-model="post.description" class="form-control"></textarea>
 	</div>
 	

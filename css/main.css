@@ -1,0 +1,9 @@
+
+input.ng-dirty.ng-invalid {
+	border-color: red;
+}
+
+.post-link {
+	color: rgb(150, 150, 150);
+	padding-left: 10px;
+}
