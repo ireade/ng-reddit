@@ -28,10 +28,8 @@ app.controller('PostController', function(FIREBASE_URL, $scope, $rootScope, $loc
 	}
 	$scope.deletePost = function(thisPost) {
 
-		console.log(thisPost);
-
-		// thisPost.$remove(thisPost);
-		// $location.path('/');
+		thisPost.$remove(thisPost);
+		$location.path('/');
 	};
 
 
