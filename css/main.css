@@ -1,3 +1,12 @@
+body {
+	padding-top: 70px;
+}
+
+
+.container {
+	width: 80%; 
+	margin: 0 auto;
+}
 
 input.ng-dirty.ng-invalid {
 	border-color: red;
@@ -6,4 +15,16 @@ input.ng-dirty.ng-invalid {
 .post-link {
 	color: rgb(150, 150, 150);
 	padding-left: 10px;
+}
+
+main {
+	padding-bottom: 100px;
+	width: 80%; 
+	margin: 0 auto; 
+}
+
+
+.navbar-text {
+	padding-left: 0;
+	margin-left: 0;
 }

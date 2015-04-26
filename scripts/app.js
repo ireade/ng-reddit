@@ -24,3 +24,9 @@ app.config(function($routeProvider) {
 		});
 
 });
+
+app.filter('fromNow', function() {
+  return function(date) {
+    return moment(date).fromNow();
+  }
+});

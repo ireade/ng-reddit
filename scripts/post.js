@@ -2,17 +2,16 @@ app.controller('PostController', function(FIREBASE_URL, $scope, $rootScope, $loc
 
 	$scope.postId = $routeParams.postId;
 
-
-
 	var ref = new Firebase(FIREBASE_URL + '/' + $scope.postId);
 	var thisPost = $firebaseObject(ref);
 
 	$scope.thisPost = thisPost;
 
-	//console.log(thisPost)
 
-
+	// Tab and Message
+	//
 	$scope.tab = 1;
+
 	$scope.updateMessage = '';
 
 	$scope.clearupdateMessage = function() {
@@ -22,18 +21,22 @@ app.controller('PostController', function(FIREBASE_URL, $scope, $rootScope, $loc
 	
 
 	// Edit/Delete Settings 
+	//
 	$scope.updatePost = function(thisPost) {
 		thisPost.$save(thisPost);
 		$scope.updateMessage = 'The post was successfully updated.';
 	}
+	$scope.deletePost = function(thisPost) {
 
-	$scope.deletePost = function(post) {
-		thisPost.$remove(thisPost);
+		console.log(thisPost);
+
+		// thisPost.$remove(thisPost);
+		// $location.path('/');
 	};
 
 
 	//Voting System
-	// //$rootScope.currentUser.userVote = 1;
+	// 
 	$scope.upVote = function(thisPost) {
 
 		if ($rootScope.currentUser) {
@@ -60,37 +63,32 @@ app.controller('PostController', function(FIREBASE_URL, $scope, $rootScope, $loc
 
 
 
-	// // Comments
+	// Comments
 
-	// $scope.addComment = function(post, comment) {
+	var commentsRef = new Firebase(FIREBASE_URL + '/' + $scope.postId + '/comments');
+	var comments = $firebaseArray(commentsRef);
 
-	// 	var ref = new Firebase(FIREBASE_URL + '/'+ post.$id + '/comments');
-	// 	var comments = $firebaseArray(ref);
+	$scope.comments = comments;
 
-	// 	comments.$add({
-	// 		user: $rootScope.currentUser.twitter.username,
-	// 		text: comment.text,
-	// 		date: Firebase.ServerValue.TIMESTAMP,
-	// 	});
+	$scope.addComment = function(comment) {
 
-	// 	comment.text = '';
-	// };
+		comments.$add({
+			user: $rootScope.currentUser.twitter.username,
+			text: $scope.comment.text,
+			date: Firebase.ServerValue.TIMESTAMP,
+		}).then(function() {
+			comment.text = '';
+			thisPost.commentCount++;
+			thisPost.$save(thisPost);
+		});
+	};
 
-	// $scope.deleteComment = function(post, comment) {
+	$scope.deleteComment = function(comment) {
 
-	// 	var ref = new Firebase(FIREBASE_URL + '/'+ post.$id + '/comments');
-	// 	var comments = $firebaseArray(ref);
-
-
-	// 	//comments.$remove();
-
-
-
-	// 	console.log(comment);
-
-	// 	//console.log(posts);
-
-	// };
-
+		comments.$remove(comment).then(function() {
+			thisPost.commentCount--;
+			thisPost.$save(thisPost);
+		});
+	};
 
 });

@@ -9,7 +9,10 @@
 <li ng-repeat="post in posts | orderBy: '-votes'" class="list-group-item">
 
 	
-	<h2 style="display: inline-block;"><a ng-href="{{post.url}}">{{post.name}}</a></h2> 
+	<h2 style="display: inline-block;" >
+		<a ng-show="post.url" ng-href="{{post.url}}" target="_blank">{{post.name}}</a>
+		<a ng-hide="post.url" ng-href="#/posts/{{post.$id}}" >{{post.name}}</a>
+	</h2> 
 
 	<span class="post-link" ng-show="post.url">({{post.url}})</span>
 	<span class="post-link" ng-hide="post.url">(self.ng-reddit)</span>
@@ -29,7 +32,7 @@
 
 
 	<p>
-		<a ng-href="#/posts/{{post.$id}}">{{post.commentCount}} Comments</a> | Posted on {{post.date | date}} by <a ng-href="https://twitter.com/{{post.user}}">{{post.user}}</a>
+		<a ng-href="#/posts/{{post.$id}}">{{post.commentCount}} Comments</a> | Posted {{post.date | fromNow}} by <a ng-href="https://twitter.com/{{post.user}}" target="_blank">{{post.user}}</a>
 	</p>
 
 	<p></p>

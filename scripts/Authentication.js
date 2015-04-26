@@ -17,12 +17,10 @@ app.factory('Authentication', function($firebase, $firebaseAuth, $rootScope, FIR
 			ref.unauth();
 		},
 		checkAuth: function() {
-
 			auth.$onAuth(function(authUser) {
-			if (authUser) {
-				$rootScope.currentUser = authUser;
-			} else {
-			}
+				if (authUser) {
+					$rootScope.currentUser = authUser;
+				} 
 			})
 		}
 	}

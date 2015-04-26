@@ -1,7 +1,6 @@
 <div class="panel panel-default" style="margin-top: 50px;">
 
 <header class="panel-heading">
-
 	<div class="btn-group pull-right">
 		<button ng-click="upVote(thisPost)" class="btn btn-success btn-sm" ng-hide="thisPost.user == currentUser.twitter.username">
 			Up
@@ -14,22 +13,12 @@
 		</button>
 	</div>
 
-	
 	<h1>{{thisPost.name}}</h1>
 
-	
-
-
 	<div class="post-description">
-		<p>Posted on {{thisPost.date | date}} by <a ng-href="https://twitter.com/{{thisPost.user}}">{{thisPost.user}}</a></p>
-
+		<p>Posted {{thisPost.date | fromNow}} by <a ng-href="https://twitter.com/{{thisPost.user}}" target="_blank">{{thisPost.user}}</a></p>
 		<p ng-show="thisPost.description">{{thisPost.description}}</p>
 	</div>
-
-
-	
-
-
 </header>
 
 
@@ -37,46 +26,51 @@
 
 <ul class="nav nav-tabs nav-justified" style="margin-bottom: 20px;">
     <li ng-class="{ active:tab == 1 }">
-      <a href ng-click="tab = 2">{{thisPost.commentCount}} Comments</a>
+      <a href ng-click="tab = 1">{{thisPost.commentCount}} Comments</a>
     </li>
     <li ng-class="{ active:tab == 2 }" ng-show="thisPost.user == currentUser.twitter.username">
-      <a href ng-click="tab = 3">Edit/Delete</a>
+      <a href ng-click="tab = 2">Edit/Delete Post</a>
     </li>
 </ul>
 
+
+<!-- Comments -->
 <div class="post-comments" ng-show="tab == 1">
+
 	<ul class="list-group">
-		<li class="list-group-item" ng-repeat="comment in thisPost.comments">
+		<li class="list-group-item" ng-repeat="comment in comments">
+
+		<button ng-click="deleteComment(comment)" class="btn btn-danger btn-sm pull-right" ng-show="comment.user == currentUser.twitter.username">Delete</button>
 			
-			<h4 class="list-group-item-heading">
-				<a ng-href="https://twitter.com/{{comment.user}}">{{comment.user}}</a> says:</h4>
+		<p>
+		{{comment.date | fromNow}}, <a ng-href="https://twitter.com/{{comment.user}}" target="_blank">{{comment.user}}</a> said:</p>
 
-			<blockquote class="list-group-item-text">{{comment.text}}</blockquote><br>
+		<blockquote class="list-group-item-text">{{comment.text}}</blockquote><br>
 
-			<button ng-click="deleteComment(thisPos, comment)" class="btn btn-danger btn-sm" ng-show="comment.user == currentUser.twitter.username">Delete Comment</button>
 		</li>
 	</ul>
 
 
-<div class="alert alert-warning" role="alert" ng-show="!currentUser">
-	You must be logged in to leave a comment.
-</div>
-
-<form ng-submit="addComment(thisPos, comment)" ng-show="currentUser">
-	<div class="form-group">
-		<label for="" class="control-label" for="focusedInput">Your Comment:</label>
-
-	
-		<textarea type="text" ng-model="comment.text" class="form-control"></textarea>
+	<div class="alert alert-warning" role="alert" ng-show="!currentUser">
+		You must be logged in to leave a comment.
 	</div>
-	<input type="submit" class="btn btn-success btn-block" value="Add Comment">
-</form>
+
+	<form ng-submit="addComment(comment)" ng-show="currentUser">
+		<div class="form-group">
+			<label for="" class="control-label" for="focusedInput">Your Comment:</label>
+
+		
+			<textarea type="text" ng-model="comment.text" class="form-control"></textarea>
+		</div>
+		<input type="submit" class="btn btn-success btn-block" value="Add Comment">
+	</form>
 	
 </div>
 
+
+<!-- Settings -->
 <div class="thisPost-settings" ng-show="tab == 2">
 
-	
 	<div class="alert alert-success" role="alert" ng-show="updateMessage != '' ">
 		{{updateMessage}}
 		<button ng-click="clearupdateMessage()" class="btn btn-sm btn-info">
@@ -89,11 +83,11 @@
 		<label for="" class="control-label" for="focusedInput">Post Name</label>
 		<input type="text" ng-model="thisPost.name" class="form-control" required>
 	</div>
-	<div class="form-group">
+	<div class="form-group" ng-show="thisPost.url">
 		<label for="" class="control-label" for="focusedInput">Post URL</label>
 		<input type="text" ng-model="thisPost.url" class="form-control">
 	</div>
-	<div class="form-group">
+	<div class="form-group" ng-show="thisPost.description">
 		<label for="" class="control-label" for="focusedInput">Post Description</label>
 		<input type="text" ng-model="thisPost.description" class="form-control">
 	</div>
@@ -103,7 +97,7 @@
 
 	<br>
 
-	<button ng-click="deletePost(thisPost)" class="btn btn-danger btn-block">Delete Post</button>
+	<button ng-click="deletePost(thisPost)" class="btn btn-danger btn-block btn-sm">Delete Post</button>
 
 </div>
 

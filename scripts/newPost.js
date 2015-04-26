@@ -36,7 +36,6 @@ app.controller('NewPostController', function(FIREBASE_URL, $scope, $rootScope, $
 					name: post.name,
 					description: null,
 					url: post.url,
-					comments: [],
 					commentCount: 0,
 					votes: 0,
 				}).then(function() {
