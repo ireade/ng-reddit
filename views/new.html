@@ -1,13 +1,13 @@
 <h1 class="text-center">Submit A New Post</h1><br>
 
-<div class="alert alert-warning" role="alert" ng-show="errorMessage != '' ">
+<div class="alert alert-warning" role="alert" ng-if="errorMessage != '' ">
 	{{errorMessage}}
 	<button ng-click="clearErrorMessage()" class="btn btn-sm btn-info">
 		Dismiss
 	</button>
 </div>
 
-<form ng-submit="addPost(post)" ng-show="currentUser" novalidate>
+<form ng-submit="addPost(post)" ng-if="currentUser" novalidate>
 
 	<div class="form-group">
 		<label for="" class="control-label" for="focusedInput">Post Name</label>

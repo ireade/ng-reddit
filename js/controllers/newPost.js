@@ -19,7 +19,6 @@ app.controller('NewPostController', function(FIREBASE_URL, $scope, $rootScope, $
 	}
 
 	
-
 	// Add post
 	$scope.addPost = function(post) {
 
@@ -48,7 +47,6 @@ app.controller('NewPostController', function(FIREBASE_URL, $scope, $rootScope, $
 
 				});
 
-
 			} else if (post.description) {
 
 				posts.$add({
@@ -71,7 +69,6 @@ app.controller('NewPostController', function(FIREBASE_URL, $scope, $rootScope, $
 				});
 
 
-
 			} else {
 				$scope.errorMessage = 'You must submit either a URL or a description';
 			}
@@ -81,7 +78,5 @@ app.controller('NewPostController', function(FIREBASE_URL, $scope, $rootScope, $
 
 		
 	};
-
-
 
 });

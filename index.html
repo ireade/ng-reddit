@@ -10,26 +10,17 @@
 </head>
 <body ng-app="ng-reddit">
 
-
     <nav class="navbar navbar-inverse navbar-fixed-top" ng-controller="LoginController">
     <div class="container">
-
 
         <a class="btn btn-default navbar-btn navbar-left" ng-href="#/">Front Page</a>
         <a class="btn btn-default navbar-btn navbar-left" ng-href="#/new">Submit</a>
         
-
-        <span class="navbar-text navbar-right" ng-show="currentUser">
+        <span class="navbar-text navbar-right" ng-if="currentUser">
             Signed in as <a ng-href="https://twitter.com/{{currentUser.twitter.username}}" class="navbar-link" target="_blank">{{currentUser.twitter.username}}</a> 
             (<a ng-href="#/" ng-click="logout()" class="navbar-link">Logout</a>)
         </span>
-        <a class="btn btn-default navbar-btn navbar-right" ng-hide="currentUser" ng-click="login()">Login with Twitter</a>
-
-        
-
-        
-
-         
+        <a class="btn btn-default navbar-btn navbar-right" ng-if="!currentUser" ng-click="login()">Login with Twitter</a>
 
     </div>
     </nav>
@@ -45,16 +36,19 @@
     </script>
     <script src="https://cdn.firebase.com/js/client/2.2.2/firebase.js"></script>
     <script src="https://cdn.firebase.com/libs/angularfire/1.0.0/angularfire.min.js"></script>
-    <script src="scripts/moment.js"></script>
+    <script src="js/lib/moment.js"></script>
     
     <!-- App -->
-    <script src="scripts/app.js"></script>
-    <script src="scripts/Authentication.js"></script>
-    
+    <script src="js/app.js"></script>
 
-    <script src="scripts/newPost.js"></script>
-    <script src="scripts/posts.js"></script>
-    <script src="scripts/post.js"></script>
-    <script src="scripts/login.js"></script>
+    <script src="js/services/Authentication.js"></script>
+
+    <script src="js/controllers/newPost.js"></script>
+    <script src="js/controllers/posts.js"></script>
+    <script src="js/controllers/post.js"></script>
+    <script src="js/controllers/login.js"></script>
 </body>
 </html>
+
+
+

@@ -6,9 +6,7 @@ app.controller('PostsController', function(FIREBASE_URL, $scope, $rootScope, $fi
 	$scope.posts = posts;
 
 
-
 	// Voting System
-
 	//$rootScope.currentUser.userVote = 1;
 	$scope.upVote = function(post) {
 
@@ -34,6 +32,5 @@ app.controller('PostsController', function(FIREBASE_URL, $scope, $rootScope, $fi
 		}
 		
 	};
-
 
 });

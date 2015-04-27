@@ -1,13 +1,11 @@
 <h1 class="text-center">ng-Reddit</h1><br>
 
-<div class="alert alert-warning" role="alert" ng-show="userVoteAlert">
+<div class="alert alert-warning" role="alert" ng-if="userVoteAlert">
 	You must be logged in to vote.
 </div>
 
 <ul class="list-group" style="list-style-type: none;">
-
 <li ng-repeat="post in posts | orderBy: '-votes'" class="list-group-item">
-
 	
 	<h2 style="display: inline-block;" >
 		<a ng-show="post.url" ng-href="{{post.url}}" target="_blank">{{post.name}}</a>
@@ -29,21 +27,9 @@
 		</button>
 	</div>
 
-
-
 	<p>
 		<a ng-href="#/posts/{{post.$id}}">{{post.commentCount}} Comments</a> | Posted {{post.date | fromNow}} by <a ng-href="https://twitter.com/{{post.user}}" target="_blank">{{post.user}}</a>
 	</p>
-
-	<p></p>
-
-
-	
-
-	
-
-	
-	
 
 </li>
 </ul>

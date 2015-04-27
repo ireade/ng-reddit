@@ -3,7 +3,6 @@ var app = angular.module('ng-reddit', ['ngRoute', 'firebase']);
 
 app.constant('FIREBASE_URL', 'https://ireade-ng-reddit.firebaseio.com');
 
-
 app.config(function($routeProvider) {
 
 	$routeProvider
