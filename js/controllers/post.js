@@ -60,6 +60,10 @@ app.controller('PostController', function(FIREBASE_URL, $scope, $rootScope, $loc
 
 
 
+	// New voting
+
+
+
 
 	// Comments
 

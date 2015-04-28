@@ -7,10 +7,10 @@
 <ul class="list-group" style="list-style-type: none;">
 <li ng-repeat="post in posts | orderBy: '-votes'" class="list-group-item">
 	
-	<h2 style="display: inline-block;" >
-		<a ng-show="post.url" ng-href="{{post.url}}" target="_blank">{{post.name}}</a>
-		<a ng-hide="post.url" ng-href="#/posts/{{post.$id}}" >{{post.name}}</a>
-	</h2> 
+	<h3 style="display: inline-block;" >
+		<a ng-if="post.url" ng-href="{{post.url}}" target="_blank">{{post.name}}</a>
+		<a ng-if="!post.url" ng-href="#/posts/{{post.$id}}" >{{post.name}}</a>
+	</h3> 
 
 	<span class="post-link" ng-show="post.url">({{post.url}})</span>
 	<span class="post-link" ng-hide="post.url">(self.ng-reddit)</span>
