@@ -33,34 +33,62 @@ app.controller('PostController', function(FIREBASE_URL, $scope, $rootScope, $loc
 	};
 
 
-	//Voting System
-	// 
-	$scope.upVote = function(thisPost) {
 
-		if ($rootScope.currentUser) {
 
-			thisPost.votes++;
-			thisPost.$save(thisPost);
+	// Voting System
+	//
+	
+
+	$scope.addVote = function(direction, thisPost) {
+
+		var votingRef = new Firebase(FIREBASE_URL + '/' + thisPost.$id + '/voters');
+		var voters = $firebaseArray(votingRef);
+		$scope.voters = voters;
+
+		var hasVoted = false;
+
+		angular.forEach(thisPost.voters, function(object, id) {
+
+			if ( object.name == $rootScope.currentUser.twitter.username ) {
+				hasVoted = true;
+			}
+		});
+
+
+		if (hasVoted) {
+			console.log("you have already voted");
 
 		} else {
-			$scope.userVoteAlert = true;
-		}
-	};
+			// User has not previously voted
 
-	$scope.downVote = function(thisPost) {
+			if (direction == 'up') {
 
-		if ($rootScope.currentUser) {
-			thisPost.votes--;
-			thisPost.$save(thisPost);
+				console.log("Voted up nigga!")
 
-		} else {
-			$scope.userVoteAlert = true;
-		}
-	};
+				thisPost.votes++;
+				thisPost.$save(thisPost);
 
+				voters.$add({
+					name: $rootScope.currentUser.twitter.username,
+					voted: 'up'
+				});
 
+			} if (direction == 'down') {
 
-	// New voting
+				console.log("Voted down nigga!")
+
+				thisPost.votes--;
+				thisPost.$save(thisPost);
+
+				voters.$add({
+					name: $rootScope.currentUser.twitter.username,
+					voted: 'down'
+				});
+			}
+
+		}	
+	} 
+
 
 
 
@@ -92,5 +120,7 @@ app.controller('PostController', function(FIREBASE_URL, $scope, $rootScope, $loc
 			thisPost.$save(thisPost);
 		});
 	};
+
+
 
 });

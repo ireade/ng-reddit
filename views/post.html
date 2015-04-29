@@ -2,13 +2,13 @@
 
 <header class="panel-heading">
 	<div class="btn-group pull-right">
-		<button ng-click="upVote(thisPost)" class="btn btn-success btn-sm" ng-hide="thisPost.user == currentUser.twitter.username">
+		<button ng-click="addVote('up', thisPost)" class="btn btn-success btn-sm" ng-hide="thisPost.user == currentUser.twitter.username" ng-if="currentUser">
 			Up
 		</button>
 		<button class="btn btn-default btn-sm" disabled>
 			{{thisPost.votes}} votes
 		</button>
-		<button ng-click="downVote(thisPost)" class="btn btn-danger btn-sm" ng-hide="thisPost.user == currentUser.twitter.username">
+		<button ng-click="addVote('down', thisPost)" class="btn btn-danger btn-sm" ng-hide="thisPost.user == currentUser.twitter.username" ng-if="currentUser">
 			Down
 		</button>
 	</div>
@@ -18,6 +18,9 @@
 	<div class="post-description">
 		<p>Posted {{thisPost.date | fromNow}} by <a ng-href="https://twitter.com/{{thisPost.user}}" target="_blank">{{thisPost.user}}</a></p>
 		<p ng-show="thisPost.description">{{thisPost.description}}</p>
+
+
+		<!-- <p ng-repeat="voter in voters">{{voter.name}}</p> -->
 	</div>
 </header>
 
