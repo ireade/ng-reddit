@@ -13,9 +13,11 @@ app.controller('PostController', function(FIREBASE_URL, $scope, $rootScope, $loc
 	$scope.tab = 1;
 
 	$scope.updateMessage = '';
+	$scope.votedWarning = '';
 
-	$scope.clearupdateMessage = function() {
+	$scope.clearMessage = function() {
 		$scope.updateMessage = '';
+		$scope.votedWarning = '';
 		return false;
 	}
 	
@@ -56,7 +58,8 @@ app.controller('PostController', function(FIREBASE_URL, $scope, $rootScope, $loc
 
 
 		if (hasVoted) {
-			console.log("you have already voted");
+			
+			$scope.votedWarning = 'Sorry, you have already voted on this post. You cannot vote again';
 
 		} else {
 			// User has not previously voted

@@ -1,3 +1,10 @@
+<div class="alert alert-warning" role="alert" ng-if="votedWarning != '' ">
+	{{votedWarning}}
+	<button ng-click="clearMessage()" class="btn btn-xs btn-info pull-right">
+		Dismiss
+	</button>
+</div>
+
 <div class="panel panel-default" style="margin-top: 50px;">
 
 <header class="panel-heading">
@@ -43,7 +50,7 @@
 		<ul class="list-group">
 			<li class="list-group-item" ng-repeat="comment in comments">
 
-			<button ng-click="deleteComment(comment)" class="btn btn-danger btn-sm pull-right" ng-show="comment.user == currentUser.twitter.username">Delete</button>
+			<button ng-click="deleteComment(comment)" class="btn btn-danger btn-xs pull-right" ng-show="comment.user == currentUser.twitter.username">Delete</button>
 				
 			<p>
 			{{comment.date | fromNow}}, <a ng-href="https://twitter.com/{{comment.user}}" target="_blank">{{comment.user}}</a> said:</p>
@@ -76,7 +83,7 @@
 
 		<div class="alert alert-success" role="alert" ng-show="updateMessage != '' ">
 			{{updateMessage}}
-			<button ng-click="clearupdateMessage()" class="btn btn-sm btn-info">
+			<button ng-click="clearMessage()" class="btn btn-xs btn-info pull-right">
 				Dismiss
 			</button>
 		</div>

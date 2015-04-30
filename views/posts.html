@@ -16,14 +16,11 @@
 	<span class="post-link" ng-hide="post.url">(self.ng-reddit)</span>
 
 	<div class="btn-group pull-right">
-		<button ng-click="addVote('up', post)" class="btn btn-success btn-sm" ng-hide="post.user == currentUser.twitter.username">
-			Up
-		</button>
 		<button class="btn btn-default btn-sm" disabled>
 			{{post.votes}} votes
 		</button>
-		<button ng-click="addVote('down', post)" class="btn btn-danger btn-sm" ng-hide="post.user == currentUser.twitter.username">
-			Down
+		<button class="btn btn-success btn-sm" ng-hide="post.user == currentUser.twitter.username">
+			<a ng-href="#/posts/{{post.$id}}" style="color: #fff;">Vote</a>
 		</button>
 	</div>
 
