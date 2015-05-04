@@ -39,8 +39,6 @@ app.controller('PostController', function(FIREBASE_URL, $scope, $rootScope, $loc
 
 	// Voting System
 	//
-	
-
 	$scope.addVote = function(direction, thisPost) {
 
 		var votingRef = new Firebase(FIREBASE_URL + '/' + thisPost.$id + '/voters');
