@@ -64,7 +64,7 @@ app.controller('PostController', function(FIREBASE_URL, $scope, $rootScope, $loc
 
 			if (direction == 'up') {
 
-				console.log("Voted up nigga!")
+				console.log("Voted up!")
 
 				thisPost.votes++;
 				thisPost.$save(thisPost);
@@ -76,7 +76,7 @@ app.controller('PostController', function(FIREBASE_URL, $scope, $rootScope, $loc
 
 			} if (direction == 'down') {
 
-				console.log("Voted down nigga!")
+				console.log("Voted down!")
 
 				thisPost.votes--;
 				thisPost.$save(thisPost);

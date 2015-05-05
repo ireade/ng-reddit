@@ -1,4 +1,3 @@
-//Starter Project for the Reddit Clone
 var app = angular.module('ng-reddit', ['ngRoute', 'firebase']);
 
 app.constant('FIREBASE_URL', 'https://ireade-ng-reddit.firebaseio.com');
